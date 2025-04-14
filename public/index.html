@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head><title>Blog Dashboard</title></head>
+<body>
+    <h1>Blog List</h1>
+    <div id="blogs"></div>
+
+    <script>
+        async function fetchBlogs() {
+            const res = await fetch('http://localhost:3000/blogs');
+            const blogs = await res.json();
+            const container = document.getElementById('blogs');
+            container.innerHTML = '';
+
+            blogs.forEach(blog => {
+                const div = document.createElement('div');
+                div.innerHTML = `
+                    <h3>${blog.title}</h3>
+                    <p>${blog.content}</p>
+                    <button onclick="deleteBlog('${blog.id}')">Delete</button>
+                    <button onclick="editBlog('${blog.id}')">Edit</button>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        async function deleteBlog(id) {
+            await fetch(`http://localhost:3000/blogs/${id}`, { method: 'DELETE' });
+            fetchBlogs();
+        }
+
+        function editBlog(id) {
+            const title = prompt("Enter new title:");
+            const content = prompt("Enter new content:");
+            fetch(`http://localhost:3000/blogs/${id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ title, content })
+            }).then(fetchBlogs);
+        }
+
+        window.onload = fetchBlogs;
+    </script>
+</body>
+</html>

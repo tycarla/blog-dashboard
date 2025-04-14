@@ -1,0 +1,32 @@
+Resources:
+  BlogFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/app.lambdaHandler
+      Runtime: nodejs20.x
+      Events:
+        GetBlogs:
+          Type: Api
+          Properties:
+            Path: /blogs
+            Method: GET
+        GetBlogById:
+          Type: Api
+          Properties:
+            Path: /blogs/{id}
+            Method: GET
+        CreateBlog:
+          Type: Api
+          Properties:
+            Path: /blogs
+            Method: POST
+        UpdateBlog:
+          Type: Api
+          Properties:
+            Path: /blogs/{id}
+            Method: PUT
+        DeleteBlog:
+          Type: Api
+          Properties:
+            Path: /blogs/{id}
+            Method: DELETE
