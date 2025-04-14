@@ -2,7 +2,10 @@ exports.lambdaHandler = async (event) => {
     const { httpMethod, path, pathParameters, body } = event;
 
     // Simulate blog storage (for now)
-    let blogs = [{ id: "1", title: "Sample Blog", content: "Hello!" }];
+    let blogs = [
+        { id: "1", title: "First Blog", content: "This is the first blog." },
+        { id: "2", title: "Second Blog", content: "Another blog post." }
+    ];
 
     if (httpMethod === 'GET' && path === '/blogs') {
         return {
