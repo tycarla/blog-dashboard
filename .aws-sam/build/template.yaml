@@ -2,6 +2,7 @@ Resources:
   BlogFunction:
     Type: AWS::Serverless::Function
     Properties:
+      CodeUri: BlogFunction
       Handler: src/app.lambdaHandler
       Runtime: nodejs20.x
       Events:
@@ -30,6 +31,5 @@ Resources:
           Properties:
             Path: /blogs/{id}
             Method: DELETE
-      CodeUri: BlogFunction
     Metadata:
       SamResourceId: BlogFunction

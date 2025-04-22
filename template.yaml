@@ -2,6 +2,7 @@ Resources:
   BlogFunction:
     Type: AWS::Serverless::Function
     Properties:
+      CodeUri: src/
       Handler: src/app.lambdaHandler
       Runtime: nodejs20.x
       Events:
